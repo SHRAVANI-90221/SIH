@@ -1,0 +1,1754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Memory Math Garden</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:"Trebuchet MS",Arial,sans-serif;
+    background:linear-gradient(135deg,#fff8ef,#eef9ff,#f8f0ff);
+    min-height:100vh;
+    color:#25205c;
+}
+
+button{
+    font-family:inherit;
+    cursor:pointer;
+    border:none;
+}
+
+.app{
+    max-width:900px;
+    margin:auto;
+    padding:18px;
+}
+
+/* HEADER */
+.header{
+    background:linear-gradient(135deg,#5531d8,#7137c9);
+    color:white;
+    border-radius:28px;
+    padding:18px;
+    display:flex;
+    align-items:center;
+    gap:15px;
+    box-shadow:0 8px 25px #5331d833;
+    margin-bottom:18px;
+}
+
+.back-btn{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    background:white;
+    color:#4c28c7;
+    font-size:30px;
+    font-weight:bold;
+    flex-shrink:0;
+}
+
+.header h1{
+    font-size:30px;
+}
+
+.header p{
+    font-size:16px;
+    margin-top:4px;
+}
+
+/* HOME */
+.home-card{
+    background:white;
+    border-radius:30px;
+    padding:25px;
+    box-shadow:0 8px 25px #00000012;
+}
+
+.hero{
+    text-align:center;
+    padding:10px 0 25px;
+}
+
+.hero .emoji{
+    font-size:70px;
+}
+
+.hero h2{
+    font-size:32px;
+    margin:8px 0;
+}
+
+.hero p{
+    font-size:19px;
+    color:#666;
+}
+
+.language-box{
+    margin:10px auto 22px;
+    max-width:500px;
+}
+
+.language-box label{
+    display:block;
+    font-size:19px;
+    font-weight:bold;
+    margin-bottom:8px;
+}
+
+.language-box select{
+    width:100%;
+    padding:16px;
+    border-radius:18px;
+    border:3px solid #7651dd;
+    font-size:20px;
+    background:#faf8ff;
+}
+
+/* START OPTIONS */
+.start-options{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+}
+
+.start-btn{
+    min-height:145px;
+    border-radius:25px;
+    padding:20px;
+    font-size:23px;
+    font-weight:bold;
+    transition:.2s;
+}
+
+.start-btn:hover{
+    transform:translateY(-4px);
+}
+
+.new-game{
+    background:#eaffd9;
+    border:3px solid #70cf48;
+}
+
+.continue-game{
+    background:#e6f5ff;
+    border:3px solid #55afe4;
+}
+
+.start-btn .big{
+    font-size:45px;
+    display:block;
+    margin-bottom:8px;
+}
+
+.progress-card{
+    background:#fff4ba;
+    border:2px solid #f1c93d;
+    border-radius:22px;
+    padding:17px;
+    margin-top:20px;
+    font-size:18px;
+}
+
+.progress-bar{
+    height:16px;
+    background:#ddd;
+    border-radius:20px;
+    margin-top:10px;
+    overflow:hidden;
+}
+
+.progress-fill{
+    height:100%;
+    width:0%;
+    background:#24ae4d;
+    border-radius:20px;
+}
+
+/* GAME */
+.game-screen{
+    display:none;
+}
+
+.game-card{
+    background:white;
+    border-radius:30px;
+    padding:20px;
+    box-shadow:0 8px 25px #00000012;
+}
+
+.top-info{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    gap:10px;
+    flex-wrap:wrap;
+}
+
+.level-badge{
+    background:#7138d5;
+    color:white;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+.score-badge{
+    background:#fff0a8;
+    padding:10px 18px;
+    border-radius:20px;
+    font-size:19px;
+    font-weight:bold;
+}
+
+.comfort-badge{
+    display:none;
+    background:#dff7d4;
+    color:#287b27;
+    padding:10px 15px;
+    border-radius:20px;
+    font-size:16px;
+    font-weight:bold;
+}
+
+.instruction{
+    text-align:center;
+    font-size:21px;
+    color:#666;
+    margin:18px 0 8px;
+}
+
+/* QUESTION */
+.question-area{
+    background:linear-gradient(135deg,#fff4cc,#f4e9ff);
+    border-radius:28px;
+    padding:25px 15px;
+    text-align:center;
+    min-height:310px;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+}
+
+.question-type{
+    font-size:18px;
+    color:#7546ce;
+    font-weight:bold;
+    margin-bottom:10px;
+}
+
+.visuals{
+    min-height:100px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:5px;
+    font-size:47px;
+    line-height:1.15;
+    padding:8px;
+}
+
+.math-question{
+    font-size:50px;
+    font-weight:900;
+    color:#38228c;
+    margin:8px;
+    letter-spacing:2px;
+}
+
+.count-text{
+    font-size:28px;
+    font-weight:bold;
+    color:#333;
+    margin-top:8px;
+}
+
+/* ANSWERS */
+.answers{
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:14px;
+    margin-top:18px;
+}
+
+.answer-btn{
+    min-height:80px;
+    background:#f7f7ff;
+    border:4px solid #7553d9;
+    border-radius:22px;
+    font-size:34px;
+    font-weight:bold;
+    color:#342078;
+    transition:.15s;
+}
+
+.answer-btn:hover{
+    background:#ece5ff;
+    transform:scale(1.02);
+}
+
+.answer-btn.correct{
+    background:#c9f7c7;
+    border-color:#2eaf42;
+}
+
+.answer-btn.wrong{
+    background:#ffd2d2;
+    border-color:#e34d4d;
+}
+
+.feedback{
+    min-height:45px;
+    text-align:center;
+    font-size:24px;
+    font-weight:bold;
+    margin-top:15px;
+}
+
+.speech-row{
+    display:flex;
+    justify-content:center;
+    gap:12px;
+    margin-top:10px;
+}
+
+.speech-btn{
+    background:#ffe19c;
+    border:3px solid #e8b52d;
+    border-radius:18px;
+    padding:12px 18px;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.next-btn{
+    display:none;
+    width:100%;
+    margin-top:14px;
+    padding:17px;
+    background:#6735d5;
+    color:white;
+    border-radius:20px;
+    font-size:23px;
+    font-weight:bold;
+}
+
+/* AI */
+.ai-panel{
+    background:#efffe9;
+    border:2px solid #85d969;
+    border-radius:22px;
+    padding:15px;
+    margin-top:18px;
+}
+
+.ai-title{
+    font-size:20px;
+    font-weight:bold;
+    color:#31812e;
+}
+
+.ai-panel p{
+    font-size:16px;
+    margin-top:5px;
+    color:#555;
+}
+
+/* COMPLETE */
+.complete{
+    display:none;
+    text-align:center;
+    padding:35px 15px;
+}
+
+.complete .trophy{
+    font-size:80px;
+}
+
+.complete h2{
+    font-size:34px;
+    margin:10px 0;
+}
+
+.complete p{
+    font-size:20px;
+    color:#666;
+}
+
+.restart-btn{
+    margin-top:20px;
+    padding:17px 28px;
+    background:#6635d3;
+    color:white;
+    border-radius:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+    .app{
+        padding:10px;
+    }
+
+    .header h1{
+        font-size:23px;
+    }
+
+    .start-options{
+        grid-template-columns:1fr;
+    }
+
+    .math-question{
+        font-size:40px;
+    }
+
+    .visuals{
+        font-size:38px;
+    }
+
+    .answer-btn{
+        font-size:28px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+    <!-- HEADER -->
+    <div class="header">
+        <button class="back-btn" onclick="goBack()">←</button>
+        <div>
+            <h1>🧮 Memory Math Garden 🌈</h1>
+            <p id="headerText">Fun counting & easy calculation</p>
+        </div>
+    </div>
+
+    <!-- HOME -->
+    <section id="homeScreen" class="home-card">
+
+        <div class="hero">
+            <div class="emoji">🍎🍊🍌</div>
+            <h2 id="welcomeTitle">Let's Play & Count!</h2>
+            <p id="welcomeText">
+                Easy colorful games for your daily memory practice.
+            </p>
+        </div>
+
+        <div class="language-box">
+            <label>🌐 Choose Language / भाषा चुनें</label>
+
+            <select id="languageSelect" onchange="changeLanguage()">
+                <option value="english">🇬🇧 English</option>
+                <option value="hindi">🇮🇳 हिन्दी</option>
+                <option value="marathi">मराठी</option>
+                <option value="awadhi">अवधी</option>
+                <option value="braj">ब्रज भाषा</option>
+                <option value="bhojpuri">भोजपुरी</option>
+                <option value="urdu">اردو</option>
+            </select>
+        </div>
+
+        <div class="start-options">
+
+            <button class="start-btn new-game" onclick="startNewGame()">
+                <span class="big">🌱</span>
+                <span id="newText">Start From Beginning</span>
+            </button>
+
+            <button class="start-btn continue-game" onclick="continueGame()">
+                <span class="big">🔄</span>
+                <span id="continueText">Continue Previous Game</span>
+            </button>
+
+        </div>
+
+        <div class="progress-card">
+            🏆 <b id="progressText">Your Progress: Level 1 / 50</b>
+
+            <div class="progress-bar">
+                <div id="homeProgress" class="progress-fill"></div>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- GAME -->
+    <section id="gameScreen" class="game-screen">
+
+        <div class="game-card">
+
+            <div class="top-info">
+
+                <div class="level-badge">
+                    🌟 <span id="levelText">Level 1</span>
+                </div>
+
+                <div class="score-badge">
+                    ⭐ <span id="scoreText">0</span>
+                </div>
+
+                <div id="comfortBadge" class="comfort-badge">
+                    🌿 Comfort Mode: EASY
+                </div>
+
+            </div>
+
+            <div id="instruction" class="instruction">
+                Look carefully and choose the correct answer.
+            </div>
+
+            <div class="question-area">
+
+                <div id="questionType" class="question-type">
+                    🍎 Count the fruits
+                </div>
+
+                <div id="visuals" class="visuals"></div>
+
+                <div id="mathQuestion" class="math-question"></div>
+
+                <div id="countText" class="count-text"></div>
+
+            </div>
+
+            <div id="answers" class="answers"></div>
+
+            <div id="feedback" class="feedback"></div>
+
+            <div class="speech-row">
+                <button class="speech-btn" onclick="speakQuestion()">
+                    🔊 Speak Question
+                </button>
+
+                <button class="speech-btn" onclick="toggleAutoSpeak()">
+                    🎤 <span id="autoSpeakText">Auto Speak OFF</span>
+                </button>
+            </div>
+
+            <button id="nextBtn" class="next-btn" onclick="nextQuestion()">
+                ➡️ Next
+            </button>
+
+            <!-- AI MONITORING -->
+            <div class="ai-panel">
+                <div class="ai-title">
+                    🤖 AI Smart Support
+                </div>
+
+                <p id="aiMessage">
+                    AI is watching your game performance and will make the game easier if needed.
+                </p>
+            </div>
+
+        </div>
+
+        <div id="completeScreen" class="complete">
+            <div class="trophy">🏆🎉</div>
+            <h2 id="completeTitle">Wonderful!</h2>
+            <p id="completeText">
+                You completed all 50 levels.
+            </p>
+
+            <button class="restart-btn" onclick="startNewGame()">
+                🌱 Start Again
+            </button>
+        </div>
+
+    </section>
+
+</div>
+
+<script>
+
+/* =========================================================
+   MEMORY MATH GARDEN
+   50 LEVELS
+   ADDITION + SUBTRACTION + COUNTING + FRUITS
+   AI COMFORT MODE + SPEECH + PROGRESS
+========================================================= */
+
+const TOTAL_LEVELS = 50;
+
+let currentLevel = 1;
+let score = 0;
+let currentAnswer = 0;
+
+let questionData = {};
+
+let attempts = 0;
+let wrongAnswers = 0;
+let consecutiveWrong = 0;
+
+let comfortMode = false;
+let autoSpeak = false;
+
+let currentLanguage = localStorage.getItem("mathLanguage") || "english";
+
+const fruitList = [
+    "🍎",
+    "🍊",
+    "🍌",
+    "🍓",
+    "🍇",
+    "🍉",
+    "🥝",
+    "🍐"
+];
+
+
+/* =========================================================
+   LANGUAGE
+========================================================= */
+
+const languages = {
+
+    english:{
+        header:"Fun counting & easy calculation",
+        welcome:"Let's Play & Count!",
+        welcomeText:"Easy colorful games for your daily memory practice.",
+        newGame:"Start From Beginning",
+        continueGame:"Continue Previous Game",
+        progress:"Your Progress: Level",
+        instruction:"Look carefully and choose the correct answer.",
+        next:"➡️ Next",
+        speak:"Speak Question",
+        autoOn:"Auto Speak ON",
+        autoOff:"Auto Speak OFF",
+        count:"Count the fruits",
+        add:"Add these numbers",
+        sub:"Take away and find the answer",
+        great:"Great job! 🌟",
+        tryAgain:"That's okay! Let's try again 😊",
+        comfort:"Comfort Mode ON — We made it easier 🌿",
+        complete:"Wonderful!",
+        completeText:"You completed all 50 levels. Amazing work! 🎉"
+    },
+
+    hindi:{
+        header:"मज़ेदार गिनती और आसान गणना",
+        welcome:"चलो गिनते हैं! 🎈",
+        welcomeText:"आसान और रंगीन खेल से रोज़ याददाश्त का अभ्यास करें।",
+        newGame:"शुरू से खेलें",
+        continueGame:"पिछला खेल जारी रखें",
+        progress:"आपकी प्रगति: स्तर",
+        instruction:"ध्यान से देखें और सही उत्तर चुनें।",
+        next:"➡️ अगला",
+        speak:"प्रश्न सुनें",
+        autoOn:"ऑटो बोलना चालू",
+        autoOff:"ऑटो बोलना बंद",
+        count:"फलों को गिनिए",
+        add:"इन संख्याओं को जोड़िए",
+        sub:"घटाकर उत्तर बताइए",
+        great:"बहुत बढ़िया! 🌟",
+        tryAgain:"कोई बात नहीं! फिर से कोशिश करें 😊",
+        comfort:"कम्फर्ट मोड चालू — हमने इसे आसान कर दिया 🌿",
+        complete:"बहुत बढ़िया!",
+        completeText:"आपने सभी 50 स्तर पूरे कर लिए। शानदार! 🎉"
+    },
+
+    marathi:{
+        header:"मजेदार मोजणी आणि सोपी गणना",
+        welcome:"चला मोजूया! 🎈",
+        welcomeText:"रोजच्या स्मरणशक्तीच्या सरावासाठी सोपा आणि रंगीत खेळ.",
+        newGame:"सुरुवातीपासून खेळा",
+        continueGame:"मागील खेळ सुरू ठेवा",
+        progress:"तुमची प्रगती: स्तर",
+        instruction:"लक्षपूर्वक पाहा आणि योग्य उत्तर निवडा.",
+        next:"➡️ पुढे",
+        speak:"प्रश्न ऐका",
+        autoOn:"ऑटो बोलणे सुरू",
+        autoOff:"ऑटो बोलणे बंद",
+        count:"फळे मोजा",
+        add:"या संख्या जमा करा",
+        sub:"वजाबाकी करून उत्तर द्या",
+        great:"खूप छान! 🌟",
+        tryAgain:"काही हरकत नाही! पुन्हा प्रयत्न करा 😊",
+        comfort:"कम्फर्ट मोड सुरू — आम्ही सोपे केले 🌿",
+        complete:"खूप छान!",
+        completeText:"तुम्ही सर्व 50 स्तर पूर्ण केले. अप्रतिम! 🎉"
+    },
+
+    awadhi:{
+        header:"मजेदार गिनती अउ आसान हिसाब",
+        welcome:"चलो गिनती करी! 🎈",
+        welcomeText:"रोज याददाश्त के अभ्यास खातिर आसान खेल।",
+        newGame:"पहिले से शुरू करी",
+        continueGame:"पिछला खेल जारी करी",
+        progress:"आपकी तरक्की: स्तर",
+        instruction:"ध्यान से देखीं अउ सही जवाब चुनीं।",
+        next:"➡️ आगे",
+        speak:"सवाल सुनाईं",
+        autoOn:"ऑटो बोलना चालू",
+        autoOff:"ऑटो बोलना बंद",
+        count:"फल गिनीं",
+        add:"इन संख्या क जोड़ीं",
+        sub:"घटा के जवाब बताईं",
+        great:"बहुत बढ़िया! 🌟",
+        tryAgain:"कौनो बात नाहीं! फेर कोशिश करीं 😊",
+        comfort:"कम्फर्ट मोड चालू — खेल आसान कर दिहिस 🌿",
+        complete:"बहुत बढ़िया!",
+        completeText:"आप 50 स्तर पूरा कर लिहिन। गजब! 🎉"
+    },
+
+    braj:{
+        header:"मजेदार गिनती अर आसान हिसाब",
+        welcome:"चलौ गिनती करैं! 🎈",
+        welcomeText:"याददास्त के अभ्यास खातर आसान अर रंगीन खेल।",
+        newGame:"सुरू तैं खेलौ",
+        continueGame:"पिछलो खेल चलाओ",
+        progress:"तुमाई तरक्की: स्तर",
+        instruction:"ध्यान सैं देखौ अर सही जवाब चुनौ।",
+        next:"➡️ आगै",
+        speak:"सवाल सुनौ",
+        autoOn:"ऑटो बोलन चालू",
+        autoOff:"ऑटो बोलन बंद",
+        count:"फल गिनौ",
+        add:"इन संख्यन क जोड़ौ",
+        sub:"घटा कै जवाब द्यौ",
+        great:"बहुत बढ़िया! 🌟",
+        tryAgain:"कौनो बात नाय! फेर कोशिश करौ 😊",
+        comfort:"कम्फर्ट मोड चालू — खेल आसान कर दियो 🌿",
+        complete:"बहुत बढ़िया!",
+        completeText:"तुमनैं 50 स्तर पूरा कर लये। गजब! 🎉"
+    },
+
+    bhojpuri:{
+        header:"मजेदार गिनती अउर आसान हिसाब",
+        welcome:"चलीं गिनती करीं! 🎈",
+        welcomeText:"याददाश्त के अभ्यास खातिर आसान आ रंगीन खेल।",
+        newGame:"सुरू से खेलीं",
+        continueGame:"पिछला खेल जारी करीं",
+        progress:"रउरा प्रगति: स्तर",
+        instruction:"ध्यान से देखीं आ सही जवाब चुनीं।",
+        next:"➡️ आगे",
+        speak:"सवाल सुनीं",
+        autoOn:"ऑटो बोलना चालू",
+        autoOff:"ऑटो बोलना बंद",
+        count:"फल गिनीं",
+        add:"ई संख्या जोड़ीं",
+        sub:"घटा के जवाब दीं",
+        great:"बहुत बढ़िया! 🌟",
+        tryAgain:"कवनो बात नइखे! फेर कोशिश करीं 😊",
+        comfort:"कम्फर्ट मोड चालू — खेल आसान हो गइल 🌿",
+        complete:"बहुत बढ़िया!",
+        completeText:"रउरा 50 गो स्तर पूरा कर लिहनी। कमाल! 🎉"
+    },
+
+    urdu:{
+        header:"مزے دار گنتی اور آسان حساب",
+        welcome:"آئیں گنتی کریں! 🎈",
+        welcomeText:"یادداشت کی مشق کے لیے آسان اور رنگین کھیل۔",
+        newGame:"شروع سے کھیلیں",
+        continueGame:"پچھلا کھیل جاری رکھیں",
+        progress:"آپ کی پیش رفت: لیول",
+        instruction:"غور سے دیکھیں اور صحیح جواب منتخب کریں۔",
+        next:"➡️ اگلا",
+        speak:"سوال سنیں",
+        autoOn:"خودکار آواز آن",
+        autoOff:"خودکار آواز بند",
+        count:"پھل گنیں",
+        add:"ان نمبروں کو جمع کریں",
+        sub:"تفریق کرکے جواب دیں",
+        great:"بہت خوب! 🌟",
+        tryAgain:"کوئی بات نہیں! دوبارہ کوشش کریں 😊",
+        comfort:"کمفرٹ موڈ آن — ہم نے اسے آسان کر دیا 🌿",
+        complete:"بہت خوب!",
+        completeText:"آپ نے تمام 50 لیول مکمل کر لیے۔ شاباش! 🎉"
+    }
+
+};
+
+
+/* =========================================================
+   INITIALIZE
+========================================================= */
+
+document.getElementById("languageSelect").value = currentLanguage;
+
+updateLanguage();
+updateHomeProgress();
+
+
+/* =========================================================
+   LANGUAGE CHANGE
+========================================================= */
+
+function changeLanguage(){
+
+    currentLanguage =
+        document.getElementById("languageSelect").value;
+
+    localStorage.setItem("mathLanguage",currentLanguage);
+
+    updateLanguage();
+
+    if(document.getElementById("gameScreen").style.display === "block"){
+        updateGameTexts();
+    }
+}
+
+
+function updateLanguage(){
+
+    const t = languages[currentLanguage];
+
+    document.getElementById("headerText").textContent = t.header;
+    document.getElementById("welcomeTitle").textContent = t.welcome;
+    document.getElementById("welcomeText").textContent = t.welcomeText;
+    document.getElementById("newText").textContent = t.newGame;
+    document.getElementById("continueText").textContent = t.continueGame;
+
+    updateHomeProgress();
+}
+
+
+function updateGameTexts(){
+
+    const t = languages[currentLanguage];
+
+    document.getElementById("instruction").textContent =
+        t.instruction;
+
+    document.getElementById("nextBtn").textContent =
+        t.next;
+
+    document.querySelector(".speech-btn").textContent =
+        "🔊 " + t.speak;
+
+    document.getElementById("autoSpeakText").textContent =
+        autoSpeak ? t.autoOn : t.autoOff;
+}
+
+
+/* =========================================================
+   NEW GAME
+========================================================= */
+
+function startNewGame(){
+
+    currentLevel = 1;
+    score = 0;
+
+    attempts = 0;
+    wrongAnswers = 0;
+    consecutiveWrong = 0;
+
+    comfortMode = false;
+
+    localStorage.setItem(
+        "memoryMathProgress",
+        JSON.stringify({
+            level:1,
+            score:0
+        })
+    );
+
+    showGame();
+}
+
+
+/* =========================================================
+   CONTINUE
+========================================================= */
+
+function continueGame(){
+
+    const saved =
+        JSON.parse(
+            localStorage.getItem("memoryMathProgress")
+        );
+
+    if(saved && saved.level){
+
+        currentLevel = saved.level;
+        score = saved.score || 0;
+
+    }else{
+
+        currentLevel = 1;
+        score = 0;
+    }
+
+    attempts = 0;
+    wrongAnswers = 0;
+    consecutiveWrong = 0;
+
+    comfortMode = false;
+
+    showGame();
+}
+
+
+/* =========================================================
+   SHOW GAME
+========================================================= */
+
+function showGame(){
+
+    document.getElementById("homeScreen").style.display = "none";
+    document.getElementById("gameScreen").style.display = "block";
+
+    document.getElementById("completeScreen").style.display = "none";
+    document.querySelector(".game-card").style.display = "block";
+
+    updateGameTexts();
+    createQuestion();
+}
+
+
+/* =========================================================
+   QUESTION GENERATOR
+========================================================= */
+
+function createQuestion(){
+
+    attempts = 0;
+    wrongAnswers = 0;
+    consecutiveWrong = 0;
+
+    document.getElementById("feedback").textContent = "";
+    document.getElementById("nextBtn").style.display = "none";
+
+    updateLevelUI();
+
+    /*
+       AI COMFORT MODE:
+       If comfortMode is ON, use very easy numbers.
+    */
+
+    let maxNumber;
+
+    if(comfortMode){
+
+        maxNumber = 5;
+
+    }else if(currentLevel <= 10){
+
+        maxNumber = 5;
+
+    }else if(currentLevel <= 20){
+
+        maxNumber = 8;
+
+    }else if(currentLevel <= 30){
+
+        maxNumber = 10;
+
+    }else if(currentLevel <= 40){
+
+        maxNumber = 15;
+
+    }else{
+
+        maxNumber = 20;
+    }
+
+    /*
+       Different types instead of direct 1,2,3...
+    */
+
+    let type;
+
+    if(currentLevel <= 5){
+
+        type =
+            Math.random() < 0.5
+            ? "count"
+            : "addition";
+
+    }else if(currentLevel <= 15){
+
+        type =
+            randomChoice([
+                "count",
+                "addition",
+                "subtraction"
+            ]);
+
+    }else if(currentLevel <= 30){
+
+        type =
+            randomChoice([
+                "addition",
+                "subtraction",
+                "count"
+            ]);
+
+    }else{
+
+        type =
+            randomChoice([
+                "addition",
+                "subtraction"
+            ]);
+    }
+
+
+    if(type === "count"){
+
+        createCountingQuestion(maxNumber);
+
+    }else if(type === "addition"){
+
+        createAdditionQuestion(maxNumber);
+
+    }else{
+
+        createSubtractionQuestion(maxNumber);
+    }
+
+
+    if(autoSpeak){
+
+        setTimeout(
+            speakQuestion,
+            500
+        );
+    }
+}
+
+
+/* =========================================================
+   COUNTING QUESTION
+========================================================= */
+
+function createCountingQuestion(maxNumber){
+
+    let amount =
+        Math.floor(
+            Math.random() *
+            maxNumber
+        ) + 2;
+
+    if(comfortMode){
+
+        amount =
+            Math.floor(
+                Math.random()*4
+            ) + 2;
+    }
+
+    const fruit =
+        randomChoice(fruitList);
+
+    currentAnswer = amount;
+
+    questionData = {
+        type:"count",
+        answer:amount,
+        text:`${amount} ${fruit}`
+    };
+
+    document.getElementById("questionType").textContent =
+        "🍎 " + languages[currentLanguage].count;
+
+    document.getElementById("mathQuestion").textContent = "";
+
+    document.getElementById("countText").textContent = "";
+
+    let html = "";
+
+    for(let i=0;i<amount;i++){
+
+        html += `<span>${fruit}</span>`;
+
+        if((i+1)%6 === 0){
+            html += "<br>";
+        }
+    }
+
+    document.getElementById("visuals").innerHTML = html;
+
+    createAnswers(amount);
+}
+
+
+/* =========================================================
+   ADDITION QUESTION
+========================================================= */
+
+function createAdditionQuestion(maxNumber){
+
+    let a,b;
+
+    if(comfortMode){
+
+        a = randomInt(1,4);
+        b = randomInt(1,4);
+
+    }else{
+
+        a = randomInt(1,maxNumber);
+        b = randomInt(1,maxNumber);
+    }
+
+    const answer = a+b;
+
+    currentAnswer = answer;
+
+    questionData = {
+        type:"addition",
+        a:a,
+        b:b,
+        answer:answer
+    };
+
+    document.getElementById("questionType").textContent =
+        "➕ " + languages[currentLanguage].add;
+
+    document.getElementById("visuals").innerHTML =
+        getNumberVisual(a) +
+        `<span style="font-size:42px;font-weight:bold"> + </span>` +
+        getNumberVisual(b);
+
+    document.getElementById("mathQuestion").textContent =
+        a + " + " + b + " = ?";
+
+    document.getElementById("countText").textContent = "";
+
+    createAnswers(answer);
+}
+
+
+/* =========================================================
+   SUBTRACTION QUESTION
+========================================================= */
+
+function createSubtractionQuestion(maxNumber){
+
+    let a,b;
+
+    if(comfortMode){
+
+        a = randomInt(3,6);
+        b = randomInt(1,a);
+
+    }else{
+
+        a = randomInt(3,maxNumber+3);
+        b = randomInt(1,a);
+    }
+
+    const answer = a-b;
+
+    currentAnswer = answer;
+
+    questionData = {
+        type:"subtraction",
+        a:a,
+        b:b,
+        answer:answer
+    };
+
+    document.getElementById("questionType").textContent =
+        "➖ " + languages[currentLanguage].sub;
+
+    document.getElementById("visuals").innerHTML =
+        getNumberVisual(a) +
+        `<span style="font-size:42px;font-weight:bold"> − </span>` +
+        getNumberVisual(b);
+
+    document.getElementById("mathQuestion").textContent =
+        a + " − " + b + " = ?";
+
+    document.getElementById("countText").textContent = "";
+
+    createAnswers(answer);
+}
+
+
+/* =========================================================
+   VISUAL NUMBERS
+========================================================= */
+
+function getNumberVisual(number){
+
+    const emojis =
+        ["🍎","🍊","🍌","🍓","🍇"];
+
+    const fruit =
+        emojis[number % emojis.length];
+
+    let result =
+        `<span style="font-size:30px;display:inline-block;
+        background:white;padding:10px;border-radius:18px">
+        ${fruit} × ${number}
+        </span>`;
+
+    return result;
+}
+
+
+/* =========================================================
+   ANSWERS
+========================================================= */
+
+function createAnswers(correct){
+
+    let options = new Set();
+
+    options.add(correct);
+
+    let range =
+        comfortMode ? 2 : 4;
+
+    while(options.size < 4){
+
+        let variation =
+            randomInt(-range,range);
+
+        let value =
+            correct + variation;
+
+        if(value >= 0){
+
+            options.add(value);
+        }
+    }
+
+    options =
+        Array.from(options)
+        .sort(()=>Math.random()-0.5);
+
+    const container =
+        document.getElementById("answers");
+
+    container.innerHTML = "";
+
+    options.forEach(value=>{
+
+        const button =
+            document.createElement("button");
+
+        button.className = "answer-btn";
+
+        button.textContent = value;
+
+        button.onclick =
+            () => checkAnswer(value,button);
+
+        container.appendChild(button);
+    });
+}
+
+
+/* =========================================================
+   CHECK ANSWER
+========================================================= */
+
+function checkAnswer(value,button){
+
+    attempts++;
+
+    if(value === currentAnswer){
+
+        button.classList.add("correct");
+
+        document.getElementById("feedback").textContent =
+            languages[currentLanguage].great;
+
+        score += 10;
+
+        consecutiveWrong = 0;
+
+        saveProgress();
+
+        document
+            .querySelectorAll(".answer-btn")
+            .forEach(btn=>{
+                btn.disabled = true;
+            });
+
+        document.getElementById("nextBtn").style.display =
+            "block";
+
+        if(currentLevel === TOTAL_LEVELS){
+
+            document.getElementById("nextBtn").textContent =
+                "🏆 Finish";
+
+            document.getElementById("nextBtn").onclick =
+                completeGame;
+        }
+
+    }else{
+
+        button.classList.add("wrong");
+
+        wrongAnswers++;
+        consecutiveWrong++;
+
+        document.getElementById("feedback").textContent =
+            languages[currentLanguage].tryAgain;
+
+        /*
+           AI MONITORING
+           Repeated mistakes -> Comfort Mode
+        */
+
+        if(consecutiveWrong >= 2){
+
+            activateComfortMode();
+        }
+    }
+}
+
+
+/* =========================================================
+   AI COMFORT MODE
+========================================================= */
+
+function activateComfortMode(){
+
+    if(!comfortMode){
+
+        comfortMode = true;
+
+        document.getElementById("comfortBadge").style.display =
+            "block";
+
+        document.getElementById("aiMessage").textContent =
+            languages[currentLanguage].comfort;
+
+    }else{
+
+        document.getElementById("aiMessage").textContent =
+            "🤖 " + languages[currentLanguage].comfort;
+    }
+}
+
+
+/* =========================================================
+   NEXT QUESTION / LEVEL
+========================================================= */
+
+function nextQuestion(){
+
+    if(currentLevel < TOTAL_LEVELS){
+
+        currentLevel++;
+
+        saveProgress();
+
+        comfortMode = false;
+
+        document.getElementById("comfortBadge").style.display =
+            "none";
+
+        document.getElementById("aiMessage").textContent =
+            "🤖 AI is watching your performance and will help when needed.";
+
+        createQuestion();
+
+    }else{
+
+        completeGame();
+    }
+}
+
+
+/* =========================================================
+   COMPLETE
+========================================================= */
+
+function completeGame(){
+
+    currentLevel = TOTAL_LEVELS;
+
+    saveProgress();
+
+    document.querySelector(".game-card").style.display =
+        "none";
+
+    document.getElementById("completeScreen").style.display =
+        "block";
+
+    const t =
+        languages[currentLanguage];
+
+    document.getElementById("completeTitle").textContent =
+        t.complete;
+
+    document.getElementById("completeText").textContent =
+        t.completeText;
+}
+
+
+/* =========================================================
+   SAVE PROGRESS
+========================================================= */
+
+function saveProgress(){
+
+    localStorage.setItem(
+        "memoryMathProgress",
+        JSON.stringify({
+            level:currentLevel,
+            score:score
+        })
+    );
+
+    updateHomeProgress();
+}
+
+
+/* =========================================================
+   HOME PROGRESS
+========================================================= */
+
+function updateHomeProgress(){
+
+    const saved =
+        JSON.parse(
+            localStorage.getItem("memoryMathProgress")
+        );
+
+    let level =
+        saved && saved.level
+        ? saved.level
+        : 1;
+
+    const percentage =
+        Math.min(
+            100,
+            ((level-1)/TOTAL_LEVELS)*100
+        );
+
+    document.getElementById("homeProgress").style.width =
+        percentage + "%";
+
+    document.getElementById("progressText").textContent =
+        languages[currentLanguage].progress +
+        " " +
+        level +
+        " / 50";
+}
+
+
+/* =========================================================
+   GAME UI
+========================================================= */
+
+function updateLevelUI(){
+
+    document.getElementById("levelText").textContent =
+        "Level " + currentLevel;
+
+    document.getElementById("scoreText").textContent =
+        score;
+
+    if(comfortMode){
+
+        document.getElementById("comfortBadge").style.display =
+            "block";
+
+    }else{
+
+        document.getElementById("comfortBadge").style.display =
+            "none";
+    }
+}
+
+
+/* =========================================================
+   SPEECH
+========================================================= */
+
+function speakQuestion(){
+
+    if(!("speechSynthesis" in window)){
+
+        alert("Speech is not supported in this browser.");
+
+        return;
+    }
+
+    let text = "";
+
+    if(questionData.type === "count"){
+
+        text =
+            getSpeechText(
+                "count",
+                questionData.answer
+            );
+
+    }else if(questionData.type === "addition"){
+
+        text =
+            getSpeechText(
+                "addition",
+                questionData.a,
+                questionData.b
+            );
+
+    }else{
+
+        text =
+            getSpeechText(
+                "subtraction",
+                questionData.a,
+                questionData.b
+            );
+    }
+
+    const utterance =
+        new SpeechSynthesisUtterance(text);
+
+    utterance.rate = 0.75;
+    utterance.pitch = 1;
+
+    utterance.lang =
+        getSpeechLanguage();
+
+    speechSynthesis.cancel();
+
+    speechSynthesis.speak(utterance);
+}
+
+
+/* =========================================================
+   SPEECH TEXT
+========================================================= */
+
+function getSpeechText(type,a,b){
+
+    switch(currentLanguage){
+
+        case "hindi":
+
+            if(type==="count")
+                return `यह कितने फल हैं?`;
+
+            if(type==="addition")
+                return `${a} जमा ${b} कितने होते हैं?`;
+
+            return `${a} में से ${b} घटाने पर कितने बचेंगे?`;
+
+
+        case "marathi":
+
+            if(type==="count")
+                return `ही किती फळे आहेत?`;
+
+            if(type==="addition")
+                return `${a} अधिक ${b} किती होतात?`;
+
+            return `${a} मधून ${b} वजा केल्यावर किती उरतात?`;
+
+
+        case "awadhi":
+
+            if(type==="count")
+                return `ई कितने फल हैं?`;
+
+            if(type==="addition")
+                return `${a} जमा ${b} कितने होई?`;
+
+            return `${a} में से ${b} घटाय के कितने बची?`;
+
+
+        case "braj":
+
+            if(type==="count")
+                return `ये कित्ते फल हैं?`;
+
+            if(type==="addition")
+                return `${a} और ${b} कित्ते होत हैं?`;
+
+            return `${a} मैं सैं ${b} घटायौ तो कित्ते बचैं?`;
+
+
+        case "bhojpuri":
+
+            if(type==="count")
+                return `ई कतना फल बा?`;
+
+            if(type==="addition")
+                return `${a} जमा ${b} कतना होई?`;
+
+            return `${a} में से ${b} घटवला पर कतना बची?`;
+
+
+        case "urdu":
+
+            if(type==="count")
+                return `یہ کتنے پھل ہیں؟`;
+
+            if(type==="addition")
+                return `${a} جمع ${b} کتنے ہوتے ہیں؟`;
+
+            return `${a} میں سے ${b} نکالنے پر کتنے بچتے ہیں؟`;
+
+
+        default:
+
+            if(type==="count")
+                return "How many fruits are there?";
+
+            if(type==="addition")
+                return `${a} plus ${b}, how many?`;
+
+            return `${a} minus ${b}, how many are left?`;
+    }
+}
+
+
+function getSpeechLanguage(){
+
+    switch(currentLanguage){
+
+        case "hindi":
+        case "awadhi":
+        case "braj":
+        case "bhojpuri":
+            return "hi-IN";
+
+        case "marathi":
+            return "mr-IN";
+
+        case "urdu":
+            return "ur-IN";
+
+        default:
+            return "en-IN";
+    }
+}
+
+
+/* =========================================================
+   AUTO SPEAK
+========================================================= */
+
+function toggleAutoSpeak(){
+
+    autoSpeak = !autoSpeak;
+
+    const t =
+        languages[currentLanguage];
+
+    document.getElementById("autoSpeakText").textContent =
+        autoSpeak
+        ? t.autoOn
+        : t.autoOff;
+
+    if(autoSpeak){
+
+        speakQuestion();
+    }
+}
+
+
+/* =========================================================
+   BACK BUTTON
+========================================================= */
+
+function goBack(){
+
+    /*
+       If game is open:
+       return to game home without losing progress.
+    */
+
+    if(
+        document.getElementById("gameScreen").style.display ===
+        "block"
+    ){
+
+        document.getElementById("gameScreen").style.display =
+            "none";
+
+        document.getElementById("homeScreen").style.display =
+            "block";
+
+        updateHomeProgress();
+
+        return;
+    }
+
+    /*
+       If already on game home:
+       try to return to main application page.
+       Change this filename later according to your main page.
+    */
+
+    if(document.referrer){
+
+        window.history.back();
+
+    }else{
+
+        window.location.href = "index.html";
+    }
+}
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function randomInt(min,max){
+
+    return Math.floor(
+        Math.random()*(max-min+1)
+    ) + min;
+}
+
+
+function randomChoice(array){
+
+    return array[
+        Math.floor(
+            Math.random()*array.length
+        )
+    ];
+}
+
+
+/* =========================================================
+   KEYBOARD ACCESSIBILITY
+========================================================= */
+
+document.addEventListener(
+    "keydown",
+    function(event){
+
+        if(event.key === "Escape"){
+
+            goBack();
+        }
+    }
+);
+
+
+/* =========================================================
+   SAVE LANGUAGE
+========================================================= */
+
+window.addEventListener(
+    "beforeunload",
+    function(){
+
+        localStorage.setItem(
+            "mathLanguage",
+            currentLanguage
+        );
+    }
+);
+
+</script>
+
+</body>
+</html>

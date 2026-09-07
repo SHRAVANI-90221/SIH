@@ -1,0 +1,1265 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+        content="#5B21B6">
+
+    <title>AI Monitoring</title>
+
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+
+        body {
+
+            background: #FFF9EF;
+
+            color: #222;
+
+            padding-bottom: 40px;
+        }
+
+
+        .app {
+
+            max-width: 520px;
+
+            margin: auto;
+
+            min-height: 100vh;
+        }
+
+
+
+        /* ================= HEADER ================= */
+
+        .header {
+
+            background:
+            linear-gradient(
+                135deg,
+                #5420B8,
+                #8755E8
+            );
+
+            color: white;
+
+            padding: 22px 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+        }
+
+
+        .back {
+
+            font-size: 38px;
+
+            cursor: pointer;
+
+            width: 42px;
+        }
+
+
+        .header h1 {
+
+            font-size: 25px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .header p {
+
+            font-size: 14px;
+
+            opacity: .9;
+        }
+
+
+
+        /* ================= LANGUAGE ================= */
+
+        .language-area {
+
+            padding: 15px 20px 5px;
+
+            display: flex;
+
+            justify-content: flex-end;
+        }
+
+
+        .language-btn {
+
+            background: white;
+
+            border: 2px solid #6330C9;
+
+            color: #4D1AA8;
+
+            border-radius: 14px;
+
+            padding: 10px 14px;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+
+        /* ================= AI INTRO ================= */
+
+        .intro {
+
+            margin: 15px 20px;
+
+            padding: 22px;
+
+            border-radius: 24px;
+
+            background: #FFE56B;
+
+            border: 3px solid #FFC928;
+
+            text-align: center;
+        }
+
+
+        .robot {
+
+            font-size: 58px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .intro h2 {
+
+            font-size: 24px;
+
+            color: #543900;
+
+            margin-bottom: 8px;
+        }
+
+
+        .intro p {
+
+            font-size: 15px;
+
+            line-height: 1.5;
+
+            color: #624700;
+        }
+
+
+
+        /* ================= SECTION ================= */
+
+        .section {
+
+            padding: 15px 20px;
+        }
+
+
+        .section-title {
+
+            font-size: 23px;
+
+            font-weight: bold;
+
+            color: #39167F;
+
+            margin-bottom: 12px;
+        }
+
+
+
+        /* ================= LIVE MONITOR ================= */
+
+        .live-card {
+
+            background: white;
+
+            border: 3px solid #7C4DDB;
+
+            border-radius: 23px;
+
+            padding: 20px;
+
+            box-shadow:
+            0 5px 15px
+            rgba(0,0,0,.07);
+        }
+
+
+        .live-top {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+
+        .live-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            border-radius: 20px;
+
+            background: #EEE5FF;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 40px;
+
+            flex-shrink: 0;
+        }
+
+
+        .live-top h3 {
+
+            font-size: 21px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .live-top p {
+
+            color: #666;
+
+            font-size: 14px;
+
+            line-height: 1.4;
+        }
+
+
+        .online {
+
+            display: inline-block;
+
+            margin-top: 7px;
+
+            background: #21A13A;
+
+            color: white;
+
+            padding: 7px 13px;
+
+            border-radius: 20px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+
+        /* ================= CURRENT ACTIVITY ================= */
+
+        .current {
+
+            background: #F7F3FF;
+
+            border-radius: 17px;
+
+            padding: 17px;
+
+            margin-top: 12px;
+        }
+
+
+        .current-title {
+
+            font-size: 14px;
+
+            color: #777;
+
+            margin-bottom: 6px;
+        }
+
+
+        .current-game {
+
+            font-size: 21px;
+
+            font-weight: bold;
+
+            color: #45209E;
+        }
+
+
+        .time {
+
+            margin-top: 8px;
+
+            font-size: 16px;
+        }
+
+
+
+        /* ================= ATTENTION ================= */
+
+        .attention {
+
+            margin-top: 15px;
+
+            background: #FFF0C2;
+
+            border-left: 7px solid #F0A800;
+
+            border-radius: 12px;
+
+            padding: 16px;
+
+            font-size: 15px;
+
+            line-height: 1.5;
+        }
+
+
+
+        /* ================= BEHAVIOUR ================= */
+
+        .behaviour-card {
+
+            background: white;
+
+            border-radius: 22px;
+
+            border: 3px solid #FFB52D;
+
+            padding: 20px;
+        }
+
+
+        .behaviour {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #EEE;
+        }
+
+
+        .behaviour:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .behaviour-icon {
+
+            width: 58px;
+
+            height: 58px;
+
+            border-radius: 16px;
+
+            background: #FFF2CA;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 31px;
+
+            flex-shrink: 0;
+        }
+
+
+        .behaviour-info {
+
+            flex: 1;
+        }
+
+
+        .behaviour-info h3 {
+
+            font-size: 17px;
+
+            margin-bottom: 5px;
+        }
+
+
+        .behaviour-info p {
+
+            color: #777;
+
+            font-size: 13px;
+
+            line-height: 1.4;
+        }
+
+
+        .status {
+
+            padding: 8px 12px;
+
+            border-radius: 18px;
+
+            font-size: 13px;
+
+            font-weight: bold;
+        }
+
+
+        .normal {
+
+            background: #DDF6E1;
+
+            color: #16832B;
+        }
+
+
+        .watch {
+
+            background: #FFF0C4;
+
+            color: #A66B00;
+        }
+
+
+
+        /* ================= AI DECISION ================= */
+
+        .decision-card {
+
+            background: #EEE7FF;
+
+            border: 3px solid #9365EA;
+
+            border-radius: 23px;
+
+            padding: 20px;
+        }
+
+
+        .decision-head {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 14px;
+
+            margin-bottom: 15px;
+        }
+
+
+        .decision-icon {
+
+            width: 68px;
+
+            height: 68px;
+
+            background: white;
+
+            border-radius: 20px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            font-size: 39px;
+        }
+
+
+        .decision-head h3 {
+
+            font-size: 20px;
+
+            margin-bottom: 4px;
+        }
+
+
+        .decision-head p {
+
+            color: #666;
+
+            font-size: 14px;
+        }
+
+
+        .decision {
+
+            background: white;
+
+            border-radius: 17px;
+
+            padding: 18px;
+
+            font-size: 16px;
+
+            line-height: 1.5;
+        }
+
+
+        .decision strong {
+
+            color: #5420B8;
+        }
+
+
+
+        /* ================= ACTION ================= */
+
+        .action {
+
+            width: 100%;
+
+            margin-top: 15px;
+
+            border: none;
+
+            border-radius: 17px;
+
+            padding: 17px;
+
+            background: #5420B8;
+
+            color: white;
+
+            font-size: 17px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+
+        .action:active {
+
+            transform: scale(.98);
+        }
+
+
+
+        /* ================= HISTORY ================= */
+
+        .history-card {
+
+            background: white;
+
+            border-radius: 22px;
+
+            padding: 20px;
+
+            border: 3px solid #55B9E8;
+        }
+
+
+        .history-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px 0;
+
+            border-bottom: 1px solid #EEE;
+
+            font-size: 15px;
+        }
+
+
+        .history-row:last-child {
+
+            border-bottom: none;
+        }
+
+
+        .history-left {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+
+        .history-icon {
+
+            font-size: 27px;
+        }
+
+
+        /* ================= FOOTER ================= */
+
+        .footer {
+
+            margin: 15px 20px;
+
+            padding: 18px;
+
+            background: #DDF5FF;
+
+            border: 2px solid #61B9E4;
+
+            border-radius: 18px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            color: #36515E;
+        }
+
+
+
+        /* ================= RESPONSIVE ================= */
+
+        @media(max-width:380px) {
+
+            .header h1 {
+
+                font-size: 21px;
+            }
+
+            .section-title {
+
+                font-size: 21px;
+            }
+
+            .intro h2 {
+
+                font-size: 21px;
+            }
+
+            .status {
+
+                font-size: 11px;
+
+                padding: 7px 9px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="app">
+
+
+    <!-- HEADER -->
+
+    <header class="header">
+
+        <div
+            class="back"
+            onclick="goBack()">
+
+            ←
+
+        </div>
+
+
+        <div>
+
+            <h1>
+                🤖 AI Monitoring
+            </h1>
+
+            <p>
+                Understanding activity and comfort
+            </p>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- LANGUAGE -->
+
+    <div class="language-area">
+
+        <button
+            class="language-btn"
+            onclick="changeLanguage()">
+
+            🌐 English ▼
+
+        </button>
+
+    </div>
+
+
+
+    <!-- INTRO -->
+
+    <div class="intro">
+
+        <div class="robot">
+            🤖🧠
+        </div>
+
+        <h2>
+            AI is watching over you
+        </h2>
+
+        <p>
+            The system observes activity patterns
+            and helps make activities easier and
+            more comfortable.
+        </p>
+
+    </div>
+
+
+
+    <!-- LIVE MONITOR -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            🔴 Live Monitoring
+
+        </div>
+
+
+        <div class="live-card">
+
+
+            <div class="live-top">
+
+                <div class="live-icon">
+                    👁️
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Activity Monitor
+                    </h3>
+
+                    <p>
+                        Monitoring activity behaviour
+                        in real time.
+                    </p>
+
+                    <span class="online">
+                        ● MONITORING
+                    </span>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="current">
+
+                <div class="current-title">
+                    Current Activity
+                </div>
+
+                <div class="current-game">
+                    🎮 Memory Match Game
+                </div>
+
+                <div class="time">
+
+                    ⏱️ Time spent:
+                    <strong id="timer">
+                        04:32
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="attention">
+
+                ⚠️ <strong>Attention:</strong>
+
+                The player has attempted
+                the same activity multiple times.
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- BEHAVIOUR -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            🔎 Behaviour Analysis
+
+        </div>
+
+
+        <div class="behaviour-card">
+
+
+            <div class="behaviour">
+
+                <div class="behaviour-icon">
+                    👆
+                </div>
+
+
+                <div class="behaviour-info">
+
+                    <h3>
+                        Repeated Taps
+                    </h3>
+
+                    <p>
+                        Many taps detected in
+                        a short period of time.
+                    </p>
+
+                </div>
+
+
+                <div class="status watch">
+                    WATCH
+                </div>
+
+            </div>
+
+
+
+            <div class="behaviour">
+
+                <div class="behaviour-icon">
+                    ⏱️
+                </div>
+
+
+                <div class="behaviour-info">
+
+                    <h3>
+                        Time on Activity
+                    </h3>
+
+                    <p>
+                        Activity is taking longer
+                        than usual.
+                    </p>
+
+                </div>
+
+
+                <div class="status watch">
+                    HIGH
+                </div>
+
+            </div>
+
+
+
+            <div class="behaviour">
+
+                <div class="behaviour-icon">
+                    😟
+                </div>
+
+
+                <div class="behaviour-info">
+
+                    <h3>
+                        Frustration Signal
+                    </h3>
+
+                    <p>
+                        Repeated attempts may indicate
+                        difficulty or frustration.
+                    </p>
+
+                </div>
+
+
+                <div class="status watch">
+                    CHECK
+                </div>
+
+            </div>
+
+
+
+            <div class="behaviour">
+
+                <div class="behaviour-icon">
+                    🎯
+                </div>
+
+
+                <div class="behaviour-info">
+
+                    <h3>
+                        Overall Engagement
+                    </h3>
+
+                    <p>
+                        The player is still actively
+                        participating.
+                    </p>
+
+                </div>
+
+
+                <div class="status normal">
+                    GOOD
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- AI DECISION -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            🧠 AI Decision
+
+        </div>
+
+
+        <div class="decision-card">
+
+
+            <div class="decision-head">
+
+                <div class="decision-icon">
+                    🤖
+                </div>
+
+
+                <div>
+
+                    <h3>
+                        Suggested Action
+                    </h3>
+
+                    <p>
+                        AI recommendation
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="decision">
+
+                <strong>
+                    The activity may be too difficult.
+                </strong>
+
+                <br><br>
+
+                AI recommends reducing the
+                difficulty and providing a small hint
+                instead of immediately stopping
+                the activity.
+
+            </div>
+
+
+
+            <button
+                class="action"
+                onclick="applySuggestion()">
+
+                ✨ Apply AI Suggestion
+
+            </button>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- HISTORY -->
+
+    <section class="section">
+
+        <div class="section-title">
+
+            📊 Activity History
+
+        </div>
+
+
+        <div class="history-card">
+
+
+            <div class="history-row">
+
+                <div class="history-left">
+
+                    <div class="history-icon">
+                        🎮
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Memory Game
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Today
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    80%
+                </strong>
+
+            </div>
+
+
+
+            <div class="history-row">
+
+                <div class="history-left">
+
+                    <div class="history-icon">
+                        🧩
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Puzzle
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    70%
+                </strong>
+
+            </div>
+
+
+
+            <div class="history-row">
+
+                <div class="history-left">
+
+                    <div class="history-icon">
+                        💭
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            Memory Recall
+                        </strong>
+
+                        <br>
+
+                        <small>
+                            Yesterday
+                        </small>
+
+                    </div>
+
+                </div>
+
+
+                <strong>
+                    85%
+                </strong>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+
+    <!-- FOOTER -->
+
+    <div class="footer">
+
+        ❤️ The purpose of monitoring is not
+        to judge the user.
+
+        <br>
+
+        It helps the system understand when
+        an activity should become easier,
+        slower or more supportive.
+
+    </div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* ============================
+   BACK
+============================ */
+
+function goBack() {
+
+    window.history.back();
+
+}
+
+
+
+/* ============================
+   AI SUGGESTION
+============================ */
+
+function applySuggestion() {
+
+    alert(
+        "AI Suggestion Applied!\n\n" +
+        "Difficulty reduced.\n" +
+        "A helpful hint will be provided."
+    );
+
+}
+
+
+
+/* ============================
+   SIMPLE TIMER
+============================ */
+
+let seconds = 272;
+
+
+setInterval(function() {
+
+    seconds++;
+
+    let minutes =
+        Math.floor(seconds / 60);
+
+    let remaining =
+        seconds % 60;
+
+    if (remaining < 10) {
+
+        remaining =
+            "0" + remaining;
+
+    }
+
+    document.getElementById("timer")
+        .innerText =
+        minutes + ":" + remaining;
+
+}, 1000);
+
+
+
+/* ============================
+   LANGUAGE PLACEHOLDER
+============================ */
+
+function changeLanguage() {
+
+    alert(
+        "Language options:\n\n" +
+        "🇬🇧 English\n" +
+        "🇮🇳 हिंदी\n" +
+        "🇮🇳 मराठी\n" +
+        "اردو"
+    );
+
+}
+
+</script>
+
+
+</body>
+
+</html>

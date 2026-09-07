@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Comfort Mode - Care & Connect</title>
+
+    <!-- Comfort Mode CSS -->
+    <link rel="stylesheet" href="comfort.css">
+
+</head>
+
+
+<body>
+
+    <div class="comfort-app">
+
+
+        <!-- ==============================
+             HEADER
+             ============================== -->
+
+        <header class="comfort-header">
+
+            <div class="header-icon">
+                🌸
+            </div>
+
+            <div>
+
+                <h1>
+                    Comfort Mode
+                </h1>
+
+                <p>
+                    A simple and comfortable experience
+                </p>
+
+            </div>
+
+        </header>
+
+
+        <!-- ==============================
+             MAIN CONTENT
+             ============================== -->
+
+        <main class="comfort-content">
+
+
+            <!-- ==============================
+                 WELCOME CARD
+                 ============================== -->
+
+            <section class="welcome-card">
+
+                <div class="welcome-icon">
+                    ☀️
+                </div>
+
+                <div>
+
+                    <h2>
+                        Good Morning!
+                    </h2>
+
+                    <p>
+                        Take your time.
+                    </p>
+
+                    <p>
+                        Let's do one simple activity.
+                    </p>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 COMFORT MODE CONTROL
+                 ============================== -->
+
+            <section class="comfort-control-card">
+
+                <div class="control-left">
+
+                    <div class="control-icon">
+                        🌿
+                    </div>
+
+                    <div>
+
+                        <h2>
+                            Comfort Mode
+                        </h2>
+
+                        <p>
+                            Make text larger and
+                            the screen easier to use.
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ON / OFF SWITCH -->
+
+                <div class="switch-area">
+
+                    <span
+                        id="comfortStatus"
+                        class="status-text"
+                    >
+                        OFF
+                    </span>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            id="comfortToggle"
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 TODAY
+                 ============================== -->
+
+            <section class="today-card">
+
+                <div class="today-title">
+
+                    <span>
+                        📅
+                    </span>
+
+                    <h2>
+                        TODAY
+                    </h2>
+
+                </div>
+
+
+                <div class="progress-message">
+
+                    <span class="check-icon">
+                        ✓
+                    </span>
+
+                    <div>
+
+                        <strong>
+                            You're doing great!
+                        </strong>
+
+                        <p>
+                            Keep going at your own pace.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 AI INSIGHTS
+                 ============================== -->
+
+            <section
+                class="ai-insights-card"
+                id="aiInsightsContainer"
+            >
+
+                <div class="ai-insights-title">
+
+                    <span class="ai-icon">
+                        💡
+                    </span>
+
+                    <div>
+
+                        <h2>
+                            AI Insights
+                        </h2>
+
+                        <p>
+                            About your recent activities
+                        </p>
+
+                    </div>
+
+                </div>
+
+
+                <div class="insight-box">
+
+                    <span class="insight-icon">
+                        😊
+                    </span>
+
+                    <div>
+
+                        <h3 id="aiInsightText">
+                            Your recent activities are going well.
+                        </h3>
+
+                        <p id="aiSuggestionText">
+                            Keep going at your own pace.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 NEXT ACTIVITY
+                 ============================== -->
+
+            <section class="activity-card">
+
+                <div class="activity-icon">
+                    ⭐
+                </div>
+
+                <div class="activity-info">
+
+                    <h2>
+                        Next Activity
+                    </h2>
+
+                    <p>
+                        Easy • 5 min
+                    </p>
+
+                </div>
+
+
+                <button
+                    class="start-button"
+                    onclick="startActivity()"
+                >
+                    START
+                </button>
+
+            </section>
+
+
+            <!-- ==============================
+                 QUICK OPTIONS
+                 ============================== -->
+
+            <section class="quick-section">
+
+                <h2>
+                    QUICK OPTIONS
+                </h2>
+
+
+                <div class="quick-grid">
+
+
+                    <button
+                        onclick="showMessage('Home')"
+                        class="quick-button home"
+                    >
+
+                        🏠
+
+                        <span>
+                            Home
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="showMessage('Listen')"
+                        class="quick-button listen"
+                    >
+
+                        🔊
+
+                        <span>
+                            Listen
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="showMessage('Play')"
+                        class="quick-button play"
+                    >
+
+                        🎮
+
+                        <span>
+                            Play
+                        </span>
+
+                    </button>
+
+
+                    <button
+                        onclick="showMessage('Memories')"
+                        class="quick-button memories"
+                    >
+
+                        🖼️
+
+                        <span>
+                            Memories
+                        </span>
+
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- ==============================
+                 MESSAGE
+                 ============================== -->
+
+            <div
+                id="messageBox"
+                class="message-box"
+            >
+
+                Take your time. You are doing well! 💜
+
+            </div>
+
+
+        </main>
+
+
+        <!-- ==============================
+             FOOTER
+             ============================== -->
+
+        <footer>
+
+            <button
+                onclick="goBack()"
+                class="back-button"
+            >
+
+                ← Back
+
+            </button>
+
+        </footer>
+
+
+    </div>
+
+
+    <!-- ==============================
+         JAVASCRIPT
+         ============================== -->
+
+    <!-- AI Insights -->
+    <script src="aiInsights.js"></script>
+
+    <!-- Comfort Mode -->
+    <script src="comfortMode.js"></script>
+
+
+</body>
+
+</html>
